@@ -6,10 +6,14 @@ class PagesController < ApplicationController
   end
 
   def result
-    url = "https://api.github.com/users/#{params[:username]}/repos"
-    projects_serialized = open(url).read
-    @projects = JSON.parse(projects_serialized)
-    get_favourite_language
+    begin
+      url = "https://api.github.com/users/#{params[:username]}/repos"
+      projects_serialized = open(url).read
+      @projects = JSON.parse(projects_serialized)
+      get_favourite_language
+    rescue OpenURI::HTTPError
+      redirect_to root_path
+    end
   end
 
   def get_favourite_language
