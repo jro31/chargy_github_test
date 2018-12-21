@@ -1,2 +1,7 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>What's your favourite github lanugage?</h1>
+
+<%= form_tag("/pages/result", method: "get") do %>
+  <%= label_tag(:username, "Enter your Github username:") %>
+  <%= text_field_tag(:username) %>
+  <%= submit_tag("Submit") %>
+<% end %>
